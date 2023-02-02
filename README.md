@@ -75,7 +75,7 @@ require'wildcat'.setup{
 
 <img src="https://github.com/javi-7/img/blob/master/nvim-wildcat/wildcat.gif?raw=true" alt="wildcat" style="width:1200px;"/>
 
-**NOTE:** The colorscheme **silence** from [nvim-spaschemes](https://github.com/javi-y/nvim-poe) is used in this image
+**NOTE:** The colorscheme **silence** from [nvim-poe](https://github.com/javi-7/nvim-poe) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
