@@ -1,0 +1,161 @@
+*wildcat.txt* nvim-wildcat
+A Neovim plugin for Wildfly, JBoss EAP and Tomcat.
+
+          _ _     _           _   ~
+__      _(_) | __| | ___ __ _| |_ ~
+\ \ /\ / / | |/ _` |/ __/ _` | __|~
+ \ V  V /| | | (_| | (_| (_| | |_ ~
+  \_/\_/ |_|_|\__,_|\___\__,_|\__|~
+
+REFERENCE MANUAL
+================================================================================
+CONTENTS                                                          *nvim-wildcat*
+
+    0. Introduction ............ |wildcat-introduction|
+    1. Prerequisites............ |wildcat-prerequisites|
+    2. Settings................. |wildcat-settings|
+    3. Commands................. |wildcat-commands|
+	 3.1 Enable Server ......... |WildcatEnable|
+	 3.2 Start Server .......... |WildcatUp|
+	 3.3 Stop Server ........... |WildcatDown|
+	 3.4 Build App And Run ..... |WildcatRun|
+	 3.5 Clean Server .......... |WildcatClean|
+	 3.6 Deploy on Server ...... |WildcatDeploy|
+	 3.7 Server Info ........... |WildcatInfo|
+
+================================================================================
+INTRODUCTION                                              *wildcat-introduction*
+
+nvim-wildcat is a Neovim plugin build to provice a better experience while using
+Wildfly, JBoss EAP or Tomcat servers with Neovim. This plugin provides
+the necessary commands you need to develop with Neovim, Java and Maven. The base 
+idea was to have a plugin like Eclipse Server plugin. This includes adding, 
+running, stopping, cleaning, building (with Maven) and deploying actions.
+
+================================================================================
+1. PREREQUISITES                                         *wildcat-prerequisites*
+
+- Ensure you have Java installed. Although it is a requisite to have Java to run
+Wildfly, JBoss EAP or Tomcat; this is the first requisite. 
+- Ensure you have Maven installed. nvim-wildcat will throw a warning on start if
+Maven is not installed.
+- This plugin has been developed under and for Linux OS, following open source
+philosophy.
+
+================================================================================
+2. SETTINGS                                                   *wildcat-settings*
+
+The following are the basics settings you need to use nvim-wildcat
+
+By default these are de settings. You can modify one or multiple values of it: >
+    require'wildcat'.setup{
+    	console_size = 15,
+        jboss = {
+            home = "JBOSS_HOME",
+            app_base = "standalone/deployments",
+            default = true
+        },
+        tomcat = {
+            home = "CATALINA_HOME",
+            app_base = "webapps",
+            default = false
+        }
+    }
+<
+
+NOTE: nvim-wildcat will take the 'home' values as environment variables and if
+they not exist, then will take the values as absolute paths.
+
+Example:
+If wanted to set only Tomcat server as default and set an absolute path, just
+set it this way: >
+    require'wildcat'.setup{
+        tomcat = {
+            home = "/path/to/tomcat",
+            default = true
+        }
+    }
+<
+
+================================================================================
+3. COMMANDS                                                   *wildcat-commands*
+
+The following are the commands you need to run nvim-wildcat
+
+--------------------------------------------------------------------------------
+3.1 ENABLE SERVER                                                *WildcatEnable*
+
+By default: JBoss
+
+JBoss is set by default when you first try to run wildcat. If you want to 
+change to Tomcat, execute WildcatEnableTomcat in command line mode : >
+	:WildcatEnableTomcat
+<
+
+or to change to JBoss: >
+    :WildcatEnableJBoss
+<
+
+--------------------------------------------------------------------------------
+3.2 START SERVER                                                     *WildcatUp*
+
+This command starts the server you have set (Wildfly, JBoss EAP or Tomcat): >
+	:WildcatUp
+<
+
+--------------------------------------------------------------------------------
+3.3 STOP SERVER                                                    *WildcatDown*
+
+This command stops the server you have set (Wildfly, JBoss EAP or Tomcat): >
+	:WildcatDown
+<
+--------------------------------------------------------------------------------
+3.4 BUILD APP AND RUN                                               *WildcatRun*
+
+This command will run "mvn -q clean package" to build your app, it will deploy 
+the war/ear in the deployments folder and it will start the server.
+To run it, inside the app root folder execute this command: >
+	:WildcatRun
+<
+
+If you want to run this command outside the app root folder, pass the path by 
+parameter: >
+	:WildcatRun /path/to/your/app/root/folder
+<
+
+--------------------------------------------------------------------------------
+3.5 CLEAN SERVER                                                  *WildcatClean*
+
+This command will remove all your war/ear/s deployed in the enabled server 
+deployments folder: >
+	:WildcatClean
+<
+
+--------------------------------------------------------------------------------
+3.6 DEPLOY ON SERVER                                             *WildcatDeploy*
+
+This command will deployit in the enabled server. To run it, inside the app 
+root folder execute this command: >
+	:WildcatDeploy
+<
+
+If you want to run this command outside the app root folder, pass the path by 
+parameter: >
+	:WildcatDeploy /path/to/app/root/folder
+<
+
+--------------------------------------------------------------------------------
+3.7 SERVER INFO                                                    *WildcatInfo*
+
+This command will show server info: >
+		Server   Server Name
+		Home   /path/to/server/home
+		App Base   /path/to/appbase
+		Deployed   example.war, example2.war
+<
+
+To run it: >
+	:WildcatInfo
+<
+
+--------------------------------------------------------------------------------
