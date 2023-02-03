@@ -9,15 +9,11 @@
 ## Installation
 `Vim Plug`
 ```vim
-Plug 'javi-7/nvim-wildcat'
-Plug 'javi-7/nvim-osfa'
+Plug 'javio7/nvim-wildcat'
 ```
 `Packer`
 ```lua
-use {
-    'javi-7/nvim-wildcat'
-    requires = {{ 'javi-7/nvim-osfa' }}
-  }
+use 'javio7/nvim-wildcat'
 ```
 
 ## Settings
@@ -73,9 +69,9 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/javi-7/img/blob/master/nvim-wildcat/wildcat.gif?raw=true" alt="wildcat" style="width:1200px;"/>
+<img src="https://github.com/javio7/img/blob/master/nvim-wildcat/wildcat.gif?raw=true" alt="wildcat" style="width:1200px;"/>
 
-**NOTE:** The colorscheme **silentium** from [nvim-nyctovim](https://github.com/javi-7/nvim-nyctovim) is used in this image
+**NOTE:** The colorscheme **silentium** from [nvim-nyctovim](https://github.com/javio7/nvim-nyctovim) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`

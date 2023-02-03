@@ -1,6 +1,6 @@
 -- #######################################################
 -- # Maintainer:  Javier Orfo                            #
--- # URL:         https://github.com/javi-7/nvim-wildcat #
+-- # URL:         https://github.com/javio7/nvim-wildcat #
 -- #######################################################
 
 if vim.g.wildcat then

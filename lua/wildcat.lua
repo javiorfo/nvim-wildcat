@@ -1,11 +1,10 @@
 -- #######################################################
 -- # Maintainer:  Javier Orfo                            #
--- # URL:         https://github.com/javi-7/nvim-wildcat #
+-- # URL:         https://github.com/javio7/nvim-wildcat #
 -- #######################################################
 
-local utils = require'wildcat.utils'
-local table_length = require'osfa.table'.table_length
-local Logger = utils.logger
+local util = require'wildcat.util'
+local Logger = require'wildcat.logger':new("Wildcat")
 
 local M = {}
 
@@ -31,7 +30,7 @@ M.DEFAULT_OPTIONS = {
 }
 
 local function is_server_opts_valid(server, server_name)
-    server_name = server_name or utils.const.jboss.LABEL
+    server_name = server_name or util.const.jboss.LABEL
     local home = server.home
     local app_base = server.app_base
     local default = server.default
@@ -72,7 +71,7 @@ local function is_valid(opts)
        return is_server_opts_valid(opts.jboss)
     end
     if opts.tomcat then
-       return is_server_opts_valid(opts.tomcat, utils.const.tomcat.LABEL)
+       return is_server_opts_valid(opts.tomcat, util.const.tomcat.LABEL)
     end
     return true
 end
@@ -96,7 +95,7 @@ local function set_opts(opts)
 end
 
 function M.setup(opts)
-    if table_length(opts) > 0 then
+    if util.table_length(opts) > 0 then
        if is_valid(opts) then
             set_opts(opts)
        end

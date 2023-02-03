@@ -1,13 +1,11 @@
 -- #######################################################
 -- # Maintainer:  Javier Orfo                            #
--- # URL:         https://github.com/javi-7/nvim-wildcat #
+-- # URL:         https://github.com/javio7/nvim-wildcat #
 -- #######################################################
 
 local servers = require'wildcat'.DEFAULT_OPTIONS
-local utils = require'wildcat.utils'
-local Logger = utils.logger
-local unpack = require'osfa.table'.unpack
-local read_from = require'osfa.files'.read_from
+local util = require'wildcat.util'
+local Logger = require'wildcat.logger':new("Wildcat")
 
 local jboss = servers.jboss
 local tomcat = servers.tomcat
@@ -22,7 +20,7 @@ local function execute(opts)
     local path = opts.home .. opts.sh
     local console = "sp | resize " .. servers.console_size .. " | start | terminal " .. path
     vim.cmd(console)
-    vim.cmd("file " .. utils.const.WILDCAT_SERVER_CONSOLE)
+    vim.cmd("file " .. util.const.WILDCAT_SERVER_CONSOLE)
 
     local _, error = pcall(function() require('lualine') end)
     if not error then
@@ -30,7 +28,7 @@ local function execute(opts)
     end
 
     vim.opt_local.laststatus = 3
-    local stl = string.format("%%#Normal# %s Console  %s", utils.get_server_icon(opts.label), opts.deploys)
+    local stl = string.format("%%#Normal# %s Console  %s", util.get_server_icon(opts.label), opts.deploys)
     vim.opt_local.statusline = stl
 end
 
@@ -46,22 +44,22 @@ function M.wildcat_up()
     if jboss.default then
         execute {
             home = jboss.home,
-            sh = utils.const.jboss.BASH,
-            label = utils.const.jboss.LABEL,
-            deploys = read_from(jboss_deploys)
+            sh = util.const.jboss.BASH,
+            label = util.const.jboss.LABEL,
+            deploys = util.read_from(jboss_deploys)
         }
     else
         execute {
             home = tomcat.home,
-            sh = utils.const.tomcat.BASH,
-            label = utils.const.tomcat.LABEL,
-            deploys = read_from(tomcat_deploys)
+            sh = util.const.tomcat.BASH,
+            label = util.const.tomcat.LABEL,
+            deploys = util.read_from(tomcat_deploys)
         }
     end
 end
 
 function M.wildcat_down()
-    pcall(function() vim.cmd('bd! ' .. utils.const.WILDCAT_SERVER_CONSOLE) end)
+    pcall(function() vim.cmd('bd! ' .. util.const.WILDCAT_SERVER_CONSOLE) end)
 end
 
 function M.wildcat_enable_tomcat()
@@ -77,17 +75,17 @@ end
 local function get_info_table()
     if jboss.default then
         return {
-            "Server  " .. utils.const.jboss.LABEL,
+            "Server  " .. util.const.jboss.LABEL,
             "Home  " .. jboss.home,
             "App Base  " .. jboss.app_base,
-            "Deployed  " .. read_from(jboss_deploys)
+            "Deployed  " .. util.read_from(jboss_deploys)
         }
     else
         return {
-            "Server  " .. utils.const.tomcat.LABEL,
+            "Server  " .. util.const.tomcat.LABEL,
             "Home  " .. tomcat.home,
             "App Base  " .. tomcat.app_base,
-            "Deployed  " .. read_from(tomcat_deploys)
+            "Deployed  " .. util.read_from(tomcat_deploys)
         }
     end
 end
