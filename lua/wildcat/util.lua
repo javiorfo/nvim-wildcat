@@ -17,6 +17,9 @@ local M = {
     }
 }
 
+local logger = require'wildcat.logger':new("Wildcat")
+M.Logger = logger
+
 function M.table_length(table)
     local count = 0
     for _ in pairs(table) do count = count + 1 end

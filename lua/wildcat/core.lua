@@ -6,6 +6,7 @@
 local servers = require'wildcat'.DEFAULT_OPTIONS
 local util = require'wildcat.util'
 local Logger = require'wildcat.logger':new("Wildcat")
+local info = require'wildcat.info'
 
 local jboss = servers.jboss
 local tomcat = servers.tomcat
@@ -33,11 +34,11 @@ local function execute(opts)
 end
 
 local function tomcat_deploys()
-    return io.popen('(ls ' .. tomcat_deploy_path .. ' | grep war$ 2>/dev/null) | tr "\\n" " "')
+    return io.popen('[[ -d '..  tomcat_deploy_path ..' ]] && (ls ' .. tomcat_deploy_path .. ' | grep war$ 2>/dev/null) | tr "\\n" " "')
 end
 
 local function jboss_deploys()
-    return io.popen('(ls ' .. jboss_deploy_path .. ' | grep ".*\\.\\(ear\\|war\\)$" 2>/dev/null) | tr "\\n" " "')
+    return io.popen('[[ -d '..  jboss_deploy_path ..' ]] && (ls ' .. jboss_deploy_path .. ' | grep ".*\\.\\(ear\\|war\\)$" 2>/dev/null) | tr "\\n" " "')
 end
 
 function M.wildcat_up()
@@ -90,22 +91,8 @@ local function get_info_table()
     end
 end
 
-local function popup()
-    local server, home, base, deployed = unpack(get_info_table())
-    require 'plenary.popup'.create({ server, "", home, "", base, "", deployed },
-        { border = true, pos = "center", title = "Wildcat",
-            line = 0, col = 0, minwidth = 20, minheight = 3, time = 10000 })
-end
-
 function M.wildcat_info()
-    local ok, _ = pcall(popup)
-    if not ok then
-        local title, home, base, deployed = unpack(get_info_table())
-        print(title)
-        print(home)
-        print(base)
-        print(deployed)
-    end
+    info.show(get_info_table())
 end
 
 function M.wildcat_clean()

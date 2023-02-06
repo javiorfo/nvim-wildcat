@@ -4,7 +4,7 @@
 -- #######################################################
 
 local util = require'wildcat.util'
-local Logger = require'wildcat.logger':new("Wildcat")
+local Logger = util.Logger
 
 local M = {}
 
