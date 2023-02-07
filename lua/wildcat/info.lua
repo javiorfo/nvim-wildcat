@@ -7,16 +7,16 @@ local M = {}
 function M.show(text)
         local buf_border = vim.api.nvim_create_buf(false, true)
         local ui = vim.api.nvim_list_uis()[1]
-        local width = 45
+        local width = 49
         local height = 6
 
         local lines = {
-            "┌───────────────── Wildcat ────────────────┐",
-            "│                                          │",
-            "│                                          │",
-            "│                                          │",
-            "│                                          │",
-            "└──────────────────────────────────────────┘",
+            "┌─────────────────── WILDCAT ──────────────────┐",
+            "│                                              │",
+            "│                                              │",
+            "│                                              │",
+            "│                                              │",
+            "└──────────────────────────────────────────────┘",
         }
         vim.api.nvim_buf_set_lines(buf_border, 0, -1, true, lines)
 
@@ -30,6 +30,7 @@ function M.show(text)
         }
 
         vim.api.nvim_open_win(buf_border, true, opts_border)
+        vim.cmd("syn keyword wildcatInfoTitle WILDCAT | hi link wildcatInfoTitle Boolean")
 
         local opts_text = {
             relative = 'editor',
@@ -42,6 +43,7 @@ function M.show(text)
 
         local buf_text = vim.api.nvim_create_buf(false, true)
         vim.api.nvim_open_win(buf_text, true, opts_text)
+        vim.cmd("syn keyword wildcatInfoText Server App Base Deployed Home | hi link wildcatInfoText Boolean")
 
         vim.api.nvim_buf_set_lines(buf_text, 0, -1, true, text)
 
