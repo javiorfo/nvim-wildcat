@@ -1,4 +1,5 @@
 # nvim-wildcat
+### :smirk_cat: The Wildcat (WILDfly and tomCAT)
 *nvim-wildcat is a Neovim plugin written in Lua for running Wildfly, JBoss EAP or Tomcat servers. A useful plugin for Java (or other JVM language) developers who still use the aforemention servers. The base idea was to have a plugin like Eclipse server plugin*
 
 ## Caveats
