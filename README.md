@@ -82,5 +82,3 @@ require'wildcat'.setup{
 ```console
 [user@host ~]$ chmod +x $CATALINA_HOME/bin/catalina.sh
 ```
-## Support
-- [Paypal](https://www.paypal.com/donate/?hosted_button_id=DT5ZGHRJKYJ8C)
