@@ -82,3 +82,6 @@ require'wildcat'.setup{
 ```console
 [user@host ~]$ chmod +x $CATALINA_HOME/bin/catalina.sh
 ```
+
+### Support
+- [Binance](https://www.binance.com/en/my/wallet/account/payment/send): `Pay ID: 546639204`
