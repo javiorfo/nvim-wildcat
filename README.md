@@ -10,11 +10,11 @@
 ## Installation
 `Vim Plug`
 ```vim
-Plug 'charkuils/nvim-wildcat'
+Plug 'javiorfo/nvim-wildcat'
 ```
 `Packer`
 ```lua
-use 'charkuils/nvim-wildcat'
+use 'javiorfo/nvim-wildcat'
 ```
 
 ## Settings
@@ -70,9 +70,12 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/charkuils/img/blob/master/nvim-wildcat/wildcat.gif?raw=true" alt="wildcat" style="width:1200px;"/>
+<img src="https://github.com/javiorfo/img/blob/master/nvim-wildcat/wildcat.gif?raw=true" alt="wildcat" style="width:1200px;"/>
 
-**NOTE:** The colorscheme **silentium** from [nvim-nyctovim](https://github.com/charkuils/nvim-nyctovim) is used in this image
+**NOTE:** The colorscheme **silentium** from [nvim-nyctovim](https://github.com/javiorfo/nvim-nyctovim) is used in this image
+
+### Support
+- [Paypal](https://www.paypal.com/donate/?hosted_button_id=9BFAD3RVEZNQ2)
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
