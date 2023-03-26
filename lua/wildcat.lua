@@ -1,7 +1,7 @@
--- ########################################################
--- # Maintainer: Javier Orfo                              #
--- # URL:        https://github.com/javiorfo/nvim-wildcat #
--- ########################################################
+-- ##########################################################
+-- # Maintainer: System Malt                                #
+-- # URL:        https://github.com/systemmalt/nvim-wildcat #
+-- ##########################################################
 
 local util = require'wildcat.util'
 local Logger = util.Logger
