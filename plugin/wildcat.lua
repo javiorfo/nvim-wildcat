@@ -1,6 +1,6 @@
 -- #########################################################
--- # Maintainer: Javier Orfo                               #
--- # URL:        https://github.com/whiskoder/nvim-wildcat #
+-- # Maintainer: Mr. Charkuils                             #
+-- # URL:        https://github.com/charkuils/nvim-wildcat #
 -- #########################################################
 
 if vim.g.wildcat then
