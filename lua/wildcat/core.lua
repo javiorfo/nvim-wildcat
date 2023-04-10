@@ -1,6 +1,6 @@
 -- #########################################################
--- # Maintainer: Javier Orfo                               #
--- # URL:        https://github.com/whiskoder/nvim-wildcat #
+-- # Maintainer: Mr. Charkuils                             #
+-- # URL:        https://github.com/charkuils/nvim-wildcat #
 -- #########################################################
 
 local servers = require'wildcat'.DEFAULT_OPTIONS
