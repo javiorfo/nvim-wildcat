@@ -1,8 +1,3 @@
--- #########################################################
--- # Maintainer: Mr. Charkuils                             #
--- # URL:        https://github.com/charkuils/nvim-wildcat #
--- #########################################################
-
 local M = {
     const = {
         WILDCAT_SERVER_CONSOLE = "wildcat_server_console",
