@@ -1,8 +1,3 @@
--- #########################################################
--- # Maintainer: Mr. Charkuils                             #
--- # URL:        https://github.com/charkuils/nvim-wildcat #
--- #########################################################
-
 local util = require'wildcat.util'
 local Logger = util.Logger
 
