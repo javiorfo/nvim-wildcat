@@ -1,8 +1,3 @@
--- #########################################################
--- # Maintainer: Mr. Charkuils                             #
--- # URL:        https://github.com/charkuils/nvim-wildcat #
--- #########################################################
-
 if vim.g.wildcat then
     return
 end
