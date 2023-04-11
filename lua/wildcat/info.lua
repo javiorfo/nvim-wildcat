@@ -1,8 +1,3 @@
--- #########################################################
--- # Maintainer: Mr. Charkuils                             #
--- # URL:        https://github.com/charkuils/nvim-wildcat #
--- #########################################################
-
 local M = {}
 function M.show(text)
         local buf_border = vim.api.nvim_create_buf(false, true)
