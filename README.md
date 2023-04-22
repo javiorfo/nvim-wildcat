@@ -8,13 +8,13 @@
 - This plugin has been developed on and for Linux following open source philosophy.
 
 ## Installation
-`Vim Plug`
-```vim
-Plug 'charkuils/nvim-wildcat'
-```
 `Packer`
 ```lua
 use 'charkuils/nvim-wildcat'
+```
+`Lazy`
+```lua
+{ 'charkuils/nvim-wildcat', lazy = true }
 ```
 
 ## Settings
