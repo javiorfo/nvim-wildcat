@@ -82,3 +82,7 @@ require'wildcat'.setup{
 ```console
 [user@host ~]$ chmod +x $CATALINA_HOME/bin/catalina.sh
 ```
+
+## Support Charkuils' Work
+
+<img src="https://github.com/charkuils/img/blob/master/binance/BinancePayQR.png?raw=true" alt="binance" style="width:300px;"/>
