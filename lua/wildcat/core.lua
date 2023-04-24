@@ -71,17 +71,17 @@ end
 local function get_info_table()
     if jboss.default then
         return {
-            "Server  " .. util.const.jboss.LABEL,
-            "Home  " .. jboss.home,
-            "App Base  " .. jboss.app_base,
-            "Deployed  " .. util.read_from(jboss_deploys)
+            { "Server  ", "Type" }, { "    " .. util.const.jboss.LABEL },
+            { "Home  " , "Type" }, { "    " .. jboss.home },
+            { "App Base  " , "Type" }, { "    " .. jboss.app_base },
+            { "Deployed  " , "Type" }, { "    " .. util.read_from(jboss_deploys) }
         }
     else
         return {
-            "Server  " .. util.const.tomcat.LABEL,
-            "Home  " .. tomcat.home,
-            "App Base  " .. tomcat.app_base,
-            "Deployed  " .. util.read_from(tomcat_deploys)
+            { "Server  ", "Type" }, { "    " .. util.const.tomcat.LABEL },
+            { "Home  " , "Type" }, { "    " .. tomcat.home },
+            { "App Base  " , "Type" }, { "    " .. tomcat.app_base },
+            { "Deployed  " , "Type" }, { "    " .. util.read_from(tomcat_deploys) }
         }
     end
 end

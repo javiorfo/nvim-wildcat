@@ -10,11 +10,17 @@
 ## Installation
 `Packer`
 ```lua
-use 'charkuils/nvim-wildcat'
+use {
+    'charkuils/nvim-wildcat',
+    requires = 'charkuils/nvim-popcorn'
+}
 ```
 `Lazy`
 ```lua
-{ 'charkuils/nvim-wildcat', lazy = true }
+{
+    'charkuils/nvim-wildcat', lazy = true,
+    dependencies = { 'charkuils/nvim-popcorn' }
+}
 ```
 
 ## Settings
