@@ -11,15 +11,15 @@
 `Packer`
 ```lua
 use {
-    'charkuils/nvim-wildcat',
-    requires = 'charkuils/nvim-popcorn'
+    'javiorfo/nvim-wildcat',
+    requires = 'javiorfo/nvim-popcorn'
 }
 ```
 `Lazy`
 ```lua
 {
-    'charkuils/nvim-wildcat', lazy = true,
-    dependencies = { 'charkuils/nvim-popcorn' }
+    'javiorfo/nvim-wildcat', lazy = true,
+    dependencies = { 'javiorfo/nvim-popcorn' }
 }
 ```
 
@@ -76,9 +76,9 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/charkuils/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" style="width:1000px;"/>
+<img src="https://github.com/javiorfo/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" style="width:1000px;"/>
 
-**NOTE:** The colorscheme **malt** from [nvim-whisky](https://github.com/charkuils/nvim-whisky) is used in this image
+**NOTE:** The colorscheme **malt** from [nvim-whisky](https://github.com/javiorfo/nvim-whisky) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
@@ -88,7 +88,3 @@ require'wildcat'.setup{
 ```console
 [user@host ~]$ chmod +x $CATALINA_HOME/bin/catalina.sh
 ```
-
-## Support Charkuils' Work
-
-<img src="https://github.com/charkuils/img/blob/master/binance/BinancePayQR.png?raw=true" alt="binance" style="width:300px;"/>
