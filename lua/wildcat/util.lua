@@ -44,7 +44,7 @@ end
 
 function M.get_server_icon(server)
     if server == M.const.tomcat.LABEL then
-        return " " .. server
+        return "󰄛 " .. server
     else
         return "󱄛 " .. server
     end

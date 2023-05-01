@@ -24,7 +24,7 @@ local function execute(opts)
     end
 
     vim.opt_local.laststatus = 3
-    local stl = string.format("%%#Normal# %s Console  %s", util.get_server_icon(opts.label), opts.deploys)
+    local stl = string.format("%%#Normal# %s Console   %s", util.get_server_icon(opts.label), opts.deploys)
     vim.opt_local.statusline = stl
 end
 
@@ -71,17 +71,17 @@ end
 local function get_info_table()
     if jboss.default then
         return {
-            { "Server  ", "Type" }, { "    " .. util.const.jboss.LABEL },
-            { "Home  " , "Type" }, { "    " .. jboss.home },
-            { "App Base  " , "Type" }, { "    " .. jboss.app_base },
-            { "Deployed  " , "Type" }, { "    " .. util.read_from(jboss_deploys) }
+            { "Server   ", "Type" }, { "    󱄛 " .. util.const.jboss.LABEL },
+            { "Home   " , "Type" }, { "    " .. jboss.home },
+            { "App Base   " , "Type" }, { "    " .. jboss.app_base },
+            { "Deployed   " , "Type" }, { "    " .. util.read_from(jboss_deploys) }
         }
     else
         return {
-            { "Server  ", "Type" }, { "    " .. util.const.tomcat.LABEL },
-            { "Home  " , "Type" }, { "    " .. tomcat.home },
-            { "App Base  " , "Type" }, { "    " .. tomcat.app_base },
-            { "Deployed  " , "Type" }, { "    " .. util.read_from(tomcat_deploys) }
+            { "Server   ", "Type" }, { "    " .. util.const.tomcat.LABEL },
+            { "Home   " , "Type" }, { "    󰄛 " .. tomcat.home },
+            { "App Base   " , "Type" }, { "    " .. tomcat.app_base },
+            { "Deployed   " , "Type" }, { "    " .. util.read_from(tomcat_deploys) }
         }
     end
 end
