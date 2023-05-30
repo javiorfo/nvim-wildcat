@@ -11,17 +11,17 @@
 `Packer`
 ```lua
 use {
-    'javiorfo/nvim-wildcat',
-    requires = 'javiorfo/nvim-popcorn'
+    'charkuils/nvim-wildcat',
+    requires = 'charkuils/nvim-popcorn'
 }
 ```
 `Lazy`
 ```lua
 {
-    'javiorfo/nvim-wildcat',
+    'charkuils/nvim-wildcat',
     lazy = true,
     cmd = { "WildcatRun", "WildcatUp", "WildcatInfo" },
-    dependencies = { 'javiorfo/nvim-popcorn' },
+    dependencies = { 'charkuils/nvim-popcorn' },
     config = function()
         -- Not necessary. Only if you want to change the setup
     end
@@ -81,9 +81,9 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/javiorfo/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" style="width:1000px;"/>
+<img src="https://github.com/charkuils/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" style="width:1000px;"/>
 
-**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/charkuils/nvim-nyctophilia) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
