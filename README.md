@@ -81,7 +81,7 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/caosystema/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" style="width:1000px;"/>
+<img src="https://github.com/caosystema/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
 
 **NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/caosystema/nvim-nyctophilia) is used in this image
 
@@ -96,5 +96,6 @@ require'wildcat'.setup{
 
 ---
 
-### Donate
+### Support CaoSystema's Work
+- [Binance](https://raw.githubusercontent.com/caosystema/img/master/BinancePayQR.png)
 - [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)
