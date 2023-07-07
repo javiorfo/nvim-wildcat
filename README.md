@@ -11,17 +11,17 @@
 `Packer`
 ```lua
 use {
-    'caosystema/nvim-wildcat',
-    requires = 'caosystema/nvim-popcorn'
+    'javiorfo/nvim-wildcat',
+    requires = 'javiorfo/nvim-popcorn'
 }
 ```
 `Lazy`
 ```lua
 {
-    'caosystema/nvim-wildcat',
+    'javiorfo/nvim-wildcat',
     lazy = true,
     cmd = { "WildcatRun", "WildcatUp", "WildcatInfo" },
-    dependencies = { 'caosystema/nvim-popcorn' },
+    dependencies = { 'javiorfo/nvim-popcorn' },
     config = function()
         -- Not necessary. Only if you want to change the setup
     end
@@ -81,9 +81,9 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/caosystema/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
+<img src="https://github.com/javiorfo/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
 
-**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/caosystema/nvim-nyctophilia) is used in this image
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
@@ -96,6 +96,6 @@ require'wildcat'.setup{
 
 ---
 
-### Support CaoSystema's Work
-- [Binance](https://raw.githubusercontent.com/caosystema/img/master/BinancePayQR.png)
+### Donate
+- [Binance](https://raw.githubusercontent.com/javiorfo/img/master/binance/BinancePayQR.png)
 - [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)
