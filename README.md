@@ -11,17 +11,17 @@
 `Packer`
 ```lua
 use {
-    'charkuils/nvim-wildcat',
-    requires = 'charkuils/nvim-popcorn'
+    'javiorfo/nvim-wildcat',
+    requires = 'javiorfo/nvim-popcorn'
 }
 ```
 `Lazy`
 ```lua
 {
-    'charkuils/nvim-wildcat',
+    'javiorfo/nvim-wildcat',
     lazy = true,
     cmd = { "WildcatRun", "WildcatUp", "WildcatInfo" },
-    dependencies = { 'charkuils/nvim-popcorn' },
+    dependencies = { 'javiorfo/nvim-popcorn' },
     config = function()
         -- Not necessary. Only if you want to change the setup
     end
@@ -81,9 +81,9 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/charkuils/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
+<img src="https://github.com/javiorfo/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
 
-**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/charkuils/nvim-nyctophilia) is used in this image
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
@@ -97,4 +97,4 @@ require'wildcat'.setup{
 ---
 
 ### Donate
-- [Binance](https://raw.githubusercontent.com/charkuils/img/master/binance/BinancePayQR.png)
+- [Binance](https://raw.githubusercontent.com/javiorfo/img/master/binance/BinancePayQR.png)
