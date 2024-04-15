@@ -22,9 +22,22 @@ use {
     lazy = true,
     cmd = { "WildcatRun", "WildcatUp", "WildcatInfo" },
     dependencies = { 'javiorfo/nvim-popcorn' },
-    config = function()
+    opts = {
         -- Not necessary. Only if you want to change the setup
-    end
+        -- The following are the default values
+
+        console_size = 15,
+        jboss = {
+            home = "JBOSS_HOME",
+            app_base = "standalone/deployments",
+            default = true
+        },
+        tomcat = {
+            home = "CATALINA_HOME",
+            app_base = "webapps",
+            default = false
+        }
+    }
 }
 ```
 
