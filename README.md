@@ -11,17 +11,17 @@
 `Packer`
 ```lua
 use {
-    'javiorfo/nvim-wildcat',
-    requires = 'javiorfo/nvim-popcorn'
+    'chaosystema/nvim-wildcat',
+    requires = 'chaosystema/nvim-popcorn'
 }
 ```
 `Lazy`
 ```lua
 {
-    'javiorfo/nvim-wildcat',
+    'chaosystema/nvim-wildcat',
     lazy = true,
     cmd = { "WildcatRun", "WildcatUp", "WildcatInfo" },
-    dependencies = { 'javiorfo/nvim-popcorn' },
+    dependencies = { 'chaosystema/nvim-popcorn' },
     opts = {
         -- Not necessary. Only if you want to change the setup
         -- The following are the default values
@@ -94,9 +94,9 @@ require'wildcat'.setup{
 
 ## Screenshots
 
-<img src="https://github.com/javiorfo/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
+<img src="https://github.com/chaosystema/img/blob/master/nvim-wildcat/wildcat2.gif?raw=true" alt="wildcat" />
 
-**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/javiorfo/nvim-nyctophilia) is used in this image
+**NOTE:** The colorscheme **umbra** from [nvim-nyctophilia](https://github.com/chaosystema/nvim-nyctophilia) is used in this image
 
 ## Documentation
 - nvim-wilcat comes with built-in doc `:help wildcat`
@@ -110,5 +110,4 @@ require'wildcat'.setup{
 ---
 
 ### Donate
-- **Bitcoin** [(QR)](https://raw.githubusercontent.com/javiorfo/img/master/crypto/bitcoin.png)  `1GqdJ63RDPE4eJKujHi166FAyigvHu5R7v`
-- [Paypal](https://www.paypal.com/donate/?hosted_button_id=FA7SGLSCT2H8G)
+- **Bitcoin** [(QR)](https://raw.githubusercontent.com/chaosystema/img/master/crypto/bitcoin.png)  `1GqdJ63RDPE4eJKujHi166FAyigvHu5R7v`
