@@ -1,0 +1,12 @@
+[package]
+name = "wildcat_rust"
+version = "0.1.0"
+edition = "2024"
+authors = ["Javier Orfo"]
+license-file = "LICENSE"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+nvim-oxi = { version = "0.6.0", features = ["mlua", "neovim-0-11"] }
