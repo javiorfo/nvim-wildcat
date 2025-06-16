@@ -11,9 +11,9 @@ fi
 
 LUA=$ROOT/lua
 
-rm -f $LUA/wildcat_rust.so
+rm -f $LUA/wildcatr.so
 
-cp $ROOT/rust/target/release/libwildcat_rust.so $LUA
-mv $LUA/libwildcat_rust.so $LUA/wildcat_rust.so
+cp $ROOT/rust/target/release/libwildcatr.so $LUA
+mv $LUA/libwildcatr.so $LUA/wildcatr.so
 
 # (cd $ROOT/rust && cargo clean)

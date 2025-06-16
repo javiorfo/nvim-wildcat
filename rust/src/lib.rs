@@ -1,14 +1,23 @@
+use std::sync::OnceLock;
+
 use nvim_oxi::{
-    self, Dictionary, Function,
+    self, Dictionary, Function, Object,
     api::{self, opts::OptionOpts},
+    conversion::FromObject,
     mlua::{FromLua, Table, lua},
 };
 
+use crate::config::{Jboss, Server, Tomcat, Wildcat, WildcatBuilder};
+
+mod config;
+mod util;
+
+static WILDCAT: OnceLock<Wildcat> = OnceLock::new();
+
 #[nvim_oxi::plugin]
-fn wildcat_rust() -> nvim_oxi::Result<Dictionary> {
+fn wildcatr() -> nvim_oxi::Result<Dictionary> {
     let hello = Function::from_fn(|()| {
-        //         let m: Table = get_lua_module(Module("require'wildcat.config'.SETTINGS"), Variable("jvm"));
-        let m: Table = get_lua_module2("wildcat.config").unwrap();
+        let m: Table = util::get_lua_module("wildcat.config").unwrap();
         let settings: Table = m.get("SETTINGS").unwrap();
         nvim_oxi::api::out_write(format!("{:#?} \n", settings));
     });
@@ -21,7 +30,7 @@ fn wildcat_rust() -> nvim_oxi::Result<Dictionary> {
 
         api::command("file wildcat_server_console").unwrap();
 
-        let lualine: nvim_oxi::Result<Table> = get_lua_module2("lualine");
+        let lualine: nvim_oxi::Result<Table> = util::get_lua_module("lualine");
 
         if let Ok(lualine_table) = lualine {
             let hide_fn: nvim_oxi::mlua::Function = lualine_table.get("hide").unwrap();
@@ -36,28 +45,73 @@ fn wildcat_rust() -> nvim_oxi::Result<Dictionary> {
         api::set_option_value("statusline", stl, &opts).unwrap();
     });
 
-    let api = Dictionary::from_iter([("hello", hello), ("cmd", cmd)]);
+    let setup = Function::from_fn(|dictionary: Dictionary| {
+        let jvm = match dictionary.get("jvm") {
+            Some(obj) => String::from_object(obj.clone()).ok(),
+            _ => std::env::var("JAVA_HOME").ok(),
+        };
+
+        if jvm.is_none() {
+            nvim_oxi::api::err_write("[ERROR] JVM not set \n");
+            return;
+        }
+
+        let mut wildcat_builder = WildcatBuilder::new(jvm.unwrap());
+
+        if let Some(obj) = dictionary.get("console_size") {
+            if let Ok(console_size) = usize::from_object(obj.clone()) {
+                wildcat_builder.console_size(console_size);
+            }
+        }
+
+        if let Some(obj) = dictionary.get("default") {
+            if let Ok(default) = String::from_object(obj.clone()) {
+                wildcat_builder.default_server(default.into());
+            }
+        }
+
+        if let Some(obj) = dictionary.get("build_tool") {
+            if let Ok(build_tool) = String::from_object(obj.clone()) {
+                wildcat_builder.build_tool(build_tool.into());
+            }
+        }
+
+        if let Some(obj) = dictionary.get("tomcat") {
+            match Tomcat::from_object(obj.clone()) {
+                Ok(tomcat) => {
+                    wildcat_builder.tomcat(tomcat);
+                }
+                Err(e) => {
+                    nvim_oxi::api::err_write(&format!("[ERROR] {} \n", e));
+                    return;
+                }
+            }
+        }
+
+        if let Some(obj) = dictionary.get("jboss") {
+            match Jboss::from_object(obj.clone()) {
+                Ok(jboss) => {
+                    wildcat_builder.jboss(jboss);
+                }
+                Err(e) => {
+                    nvim_oxi::api::err_write(&format!("[ERROR] {} \n", e));
+                    return;
+                }
+            }
+        }
+
+        let wildcat = wildcat_builder.build();
+
+        WILDCAT.set(wildcat).unwrap();
+
+        nvim_oxi::api::out_write(format!("{:#?} \n", WILDCAT));
+    });
+
+    let api = Dictionary::from_iter([
+        ("hello", Object::from(hello)),
+        ("cmd", Object::from(cmd)),
+        ("se", Object::from(setup)),
+    ]);
 
     Ok(api)
-}
-
-pub struct Module<'a>(pub &'a str);
-pub struct Variable<'a>(pub &'a str);
-
-pub fn get_lua_module<V: FromLua>(module: Module, variable: Variable) -> V {
-    let lua = lua();
-    lua.load(format!("{} = {}", variable.0, module.0))
-        .exec()
-        .unwrap();
-
-    let lua_module: V = lua.globals().get(variable.0).unwrap();
-    lua_module
-}
-
-pub fn get_lua_module2<V: FromLua>(module_name: &str) -> Result<V, nvim_oxi::Error> {
-    let lua = lua();
-    let lua_module: V = lua
-        .load(format!("return require('{}')", module_name))
-        .eval()?;
-    Ok(lua_module)
 }
