@@ -16,6 +16,9 @@
     lazy = true,
     cmd = { "WildcatBuild", "WildcatRun", "WildcatUp", "WildcatServer" },
     dependencies = { 'javiorfo/nvim-popcorn', 'javiorfo/nvim-spinetta' },
+    build = function()
+        require 'wildcat.build'.build()
+    end,
     opts = {
         -- The size of the server console
         console_size = 15,

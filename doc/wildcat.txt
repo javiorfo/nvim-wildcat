@@ -48,16 +48,27 @@ The following are the basics settings you need to use nvim-wildcat
 
 By default these are de settings. You can modify one or multiple values of it: >
     require'wildcat'.setup{
-    	console_size = 15,
+        -- The size of the server console
+        console_size = 15,
+
+        -- Default server (jboss or tomcat)
+        default_server = "jboss",
+
+        -- Build tool (maven or gradle)
+        build_tool = "maven",
+
+        -- Java Home (Default JAVA_HOME from the system)
+        -- If a different java home is required from JAVA_HOME env var
+        java_home = "/path/to/openjdk",
+
         jboss = {
-            home = "JBOSS_HOME",
+            path = "/path/to/jboss", -- If not set will take JBOSS_HOME from the system
             app_base = "standalone/deployments",
-            default = true
         },
+
         tomcat = {
-            home = "CATALINA_HOME",
+            path = "/path/to/tomcat", -- If not set will take CATALINA_HOME from the system
             app_base = "webapps",
-            default = false
         }
     }
 <
