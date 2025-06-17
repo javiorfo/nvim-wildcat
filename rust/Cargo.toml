@@ -1,5 +1,5 @@
 [package]
-name = "wildcatr"
+name = "wildcat"
 version = "0.1.0"
 edition = "2024"
 authors = ["Javier Orfo"]

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# ROOT=$1
-ROOT=/home/javier/.local/share/nvim/lazy/nvim-wildcat
+ROOT=$1
 
 (cd $ROOT/rust && cargo build --release)
 
@@ -11,9 +10,9 @@ fi
 
 LUA=$ROOT/lua
 
-rm -f $LUA/wildcatr.so
+rm -f $LUA/*.so
 
-cp $ROOT/rust/target/release/libwildcatr.so $LUA
-mv $LUA/libwildcatr.so $LUA/wildcatr.so
+cp $ROOT/rust/target/release/libwildcat.so $LUA
+mv $LUA/libwildcat.so $LUA/wildcat.so
 
-# (cd $ROOT/rust && cargo clean)
+(cd $ROOT/rust && cargo clean)

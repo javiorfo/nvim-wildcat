@@ -15,13 +15,12 @@ CONTENTS                                                          *nvim-wildcat*
     1. Prerequisites............ |wildcat-prerequisites|
     2. Settings................. |wildcat-settings|
     3. Commands................. |wildcat-commands|
-	 3.1 Enable Server ......... |WildcatEnable|
+	 3.1 Enable Server ......... |WildcatServer|
 	 3.2 Start Server .......... |WildcatUp|
 	 3.3 Stop Server ........... |WildcatDown|
 	 3.4 Build App And Run ..... |WildcatRun|
 	 3.5 Clean Server .......... |WildcatClean|
 	 3.6 Deploy on Server ...... |WildcatDeploy|
-	 3.7 Server Info ........... |WildcatInfo|
 
 ================================================================================
 INTRODUCTION                                              *wildcat-introduction*
@@ -83,17 +82,19 @@ set it this way: >
 The following are the commands you need to run nvim-wildcat
 
 --------------------------------------------------------------------------------
-3.1 ENABLE SERVER                                                *WildcatEnable*
+3.1 ENABLE SERVER                                                *WildcatServer*
 
 By default: JBoss
 
-JBoss is set by default when you first try to run wildcat. If you want to 
-change to Tomcat, execute WildcatEnableTomcat in command line mode : >
-	:WildcatEnableTomcat
+This command will be used to select JBoss or Tomcat by pressing <CR> on one of
+the checkboxes and will show server info: >
+		Server Name
+		Path: /path/to/server/home
+		Deploys: example.war, example2.war
 <
 
-or to change to JBoss: >
-    :WildcatEnableJBoss
+To run it: >
+	:WildcatServer
 <
 
 --------------------------------------------------------------------------------
@@ -142,20 +143,6 @@ root folder execute this command: >
 If you want to run this command outside the app root folder, pass the path by 
 parameter: >
 	:WildcatDeploy /path/to/app/root/folder
-<
-
---------------------------------------------------------------------------------
-3.7 SERVER INFO                                                    *WildcatInfo*
-
-This command will show server info: >
-		Server   Server Name
-		Home   /path/to/server/home
-		App Base   /path/to/appbase
-		Deployed   example.war, example2.war
-<
-
-To run it: >
-	:WildcatInfo
 <
 
 --------------------------------------------------------------------------------

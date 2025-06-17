@@ -4,17 +4,18 @@ end
 
 vim.g.wildcat = 1
 
-vim.api.nvim_create_user_command('WildcatUp', 'lua require("wildcat.core").wildcat_up()', {})
-vim.api.nvim_create_user_command('WildcatDown', 'lua require("wildcat.core").wildcat_down()', {})
-vim.api.nvim_create_user_command('WildcatEnableTomcat', 'lua require("wildcat.core").wildcat_enable_tomcat()', {})
-vim.api.nvim_create_user_command('WildcatEnableJBoss', 'lua require("wildcat.core").wildcat_enable_jboss()', {})
-vim.api.nvim_create_user_command('WildcatInfo', 'lua require("wildcat.core").wildcat_info()', {})
-vim.api.nvim_create_user_command('WildcatClean', 'lua require("wildcat.core").wildcat_clean()', {})
+vim.api.nvim_create_user_command('WildcatBuild', 'lua require("wildcat.build").build()', {})
+vim.api.nvim_create_user_command('WildcatUp', 'lua require("wildcat").up()', {})
+vim.api.nvim_create_user_command('WildcatDown', 'lua require("wildcat").down()', {})
+vim.api.nvim_create_user_command('WildcatServer', 'lua require("wildcat.popup").show()', {})
+vim.api.nvim_create_user_command('WildcatClean', 'lua require("wildcat").clean()', {})
 
 vim.api.nvim_create_user_command('WildcatDeploy', function(opts)
-    require 'wildcat.core'.wildcat_deploy(opts.fargs)
+    local args = opts.fargs[1] or "."
+    require 'wildcat'.deploy(args)
 end, { nargs = "?" })
 
 vim.api.nvim_create_user_command('WildcatRun', function(opts)
-    require 'wildcat.core'.wildcat_run(opts.fargs)
+    local args = opts.fargs[1] or "."
+    require 'wildcat'.run(args)
 end, { nargs = "?" })

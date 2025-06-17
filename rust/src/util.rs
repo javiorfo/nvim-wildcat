@@ -1,23 +1,19 @@
-use nvim_oxi::mlua::{lua, FromLua};
+use std::fmt::Display;
 
+use nvim_oxi::mlua::{FromLua, lua};
 
-pub fn get_lua_module<V: FromLua>(module_name: &str) -> Result<V, nvim_oxi::Error> {
+pub fn get_lua_module<T: FromLua>(module_name: &str) -> Result<T, nvim_oxi::Error> {
     let lua = lua();
-    let lua_module: V = lua
+    let lua_module: T = lua
         .load(format!("return require('{}')", module_name))
         .eval()?;
     Ok(lua_module)
 }
 
-pub struct Module<'a>(pub &'a str);
-pub struct Variable<'a>(pub &'a str);
+pub fn print_error<T: Display>(msg: T) {
+    nvim_oxi::api::err_write(&format!("󰄛  Wildcat   [ERROR] {} \n", msg));
+}
 
-pub fn get_lua_module2<V: FromLua>(module: Module, variable: Variable) -> V {
-    let lua = lua();
-    lua.load(format!("{} = {}", variable.0, module.0))
-        .exec()
-        .unwrap();
-
-    let lua_module: V = lua.globals().get(variable.0).unwrap();
-    lua_module
+pub fn print_info<T: Display>(msg: T) {
+    nvim_oxi::api::out_write(format!("󰄛  Wildcat   {} \n", msg));
 }
