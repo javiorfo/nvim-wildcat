@@ -1,7 +1,7 @@
 use std::{
     fmt::Display,
-    io,
-    process::{self, Command, Stdio},
+    io::Read,
+    process::{Command, Stdio},
 };
 
 use nvim_oxi::{
@@ -108,14 +108,7 @@ impl Wildcat {
         util::print_info(format!("Building project with {}...", self.build_tool));
         api::command("redraw").unwrap();
 
-        let status = self.build_tool.build(dir).map_err(Error::Io)?;
-
-        if !status.success() {
-            return Err(Error::Msg(format!(
-                "Build failed! Try to build the project manually with {} to get more info",
-                self.build_tool
-            )));
-        }
+        self.build_tool.build(dir)?;
 
         self.deploy(dir)?;
         self.up()?;
@@ -164,10 +157,10 @@ impl Wildcat {
         deploy.map_err(Error::Io)
     }
 
-    pub fn get_default_server_as_str(&self) -> String {
+    pub fn get_default_server_as_str(&self) -> &str {
         match self.default_server {
-            Server::Jboss => "JBoss".to_string(),
-            Server::Tomcat => "Tomcat".to_string(),
+            Server::Jboss => "JBoss",
+            Server::Tomcat => "Tomcat",
         }
     }
 
@@ -197,6 +190,13 @@ impl Wildcat {
         match self.java_home {
             Some(ref java_home) => format!("export JAVA_HOME={} &&", java_home),
             None => String::new(),
+        }
+    }
+
+    pub fn get_build_tool(&self) -> &str {
+        match self.build_tool {
+            BuildTool::Maven => " Maven",
+            BuildTool::Gradle => " Gradle",
         }
     }
 }
@@ -259,21 +259,42 @@ pub enum BuildTool {
 }
 
 impl BuildTool {
-    pub fn build(&self, dir: &str) -> io::Result<process::ExitStatus> {
-        match self {
-            BuildTool::Maven => Command::new("mvn")
-                .args(["-q", "clean", "package"])
-                .stdout(Stdio::null())
-                .stderr(Stdio::null())
-                .current_dir(dir)
-                .status(),
-            BuildTool::Gradle => Command::new("gradle")
-                .args(["-q", "clean", "build"])
-                .stdout(Stdio::null())
-                .stderr(Stdio::null())
-                .current_dir(dir)
-                .status(),
+    pub fn build(&self, dir: &str) -> Result {
+        let (command, opts) = match self {
+            BuildTool::Maven => ("mvn", ["-q", "clean", "package"]),
+            BuildTool::Gradle => ("gradle", ["-q", "clean", "build"]),
+        };
+
+        let mut child = Command::new(command)
+            .args(opts)
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .current_dir(dir)
+            .spawn()
+            .map_err(Error::Io)?;
+
+        let mut stdout = child.stdout.take().unwrap();
+        let mut stdout_buffer = String::new();
+        stdout
+            .read_to_string(&mut stdout_buffer)
+            .map_err(Error::Io)?;
+
+        let mut stderr = child.stderr.take().unwrap();
+        let mut stderr_buffer = String::new();
+        stderr
+            .read_to_string(&mut stderr_buffer)
+            .map_err(Error::Io)?;
+
+        let status = child.wait().map_err(Error::Io)?;
+
+        if !status.success() {
+            if stderr_buffer.is_empty() {
+                return Err(Error::BuildTool(stdout_buffer));
+            }
+            return Err(Error::BuildTool(stderr_buffer));
         }
+
+        Ok(())
     }
 
     pub fn target_folder(&self) -> String {
