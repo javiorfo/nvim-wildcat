@@ -4,7 +4,10 @@ use std::{
     process::{self, Command, Stdio},
 };
 
-use nvim_oxi::{api, mlua::Table};
+use nvim_oxi::{
+    api,
+    mlua::{self, Table},
+};
 
 use crate::{
     error::{Error, Result},
@@ -80,7 +83,7 @@ impl Wildcat {
         api::command("file wildcat_server_console").unwrap();
 
         if let Ok(lualine_table) = util::get_lua_module::<Table>("lualine") {
-            let hide_fn: nvim_oxi::mlua::Function = lualine_table.get("hide").unwrap();
+            let hide_fn: mlua::Function = lualine_table.get("hide").unwrap();
             hide_fn.call::<()>(()).unwrap();
         }
 
@@ -103,13 +106,15 @@ impl Wildcat {
 
     pub fn run(&self, dir: &str) -> Result {
         util::print_info(format!("Building project with {}...", self.build_tool));
+        api::command("redraw").unwrap();
 
         let status = self.build_tool.build(dir).map_err(Error::Io)?;
 
         if !status.success() {
-            return Err(Error::Msg(
-                "Build failed! Try to build the project manually to get more info".to_string(),
-            ));
+            return Err(Error::Msg(format!(
+                "Build failed! Try to build the project manually with {} to get more info",
+                self.build_tool
+            )));
         }
 
         self.deploy(dir)?;

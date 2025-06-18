@@ -41,17 +41,25 @@ local function create_content()
         table.insert(content, { "- Deploys: " .. tomcat_deploys })
     end
 
-    return content
+    local width = #jboss_path + 8
+    if #tomcat_path + 8 > width then width = #tomcat_path + 8 end
+    if #jboss_deploys + 11 > width then width = #jboss_deploys + 11 end
+    if #tomcat_deploys + 11 > width then width = #tomcat_deploys + 11 end
+
+    width = width + 5
+
+    return (width > 45 and width or 45), content
 end
 
 function M.show()
+    local width, content = create_content()
     local opts = {
-        width = 45,
+        width = width,
         height = 13,
         title = { "󰄛  Wildcat Servers", "Boolean" },
         footer = { "<CR> to select", "String" },
         border = borders.simple,
-        content = create_content(),
+        content = content,
         do_after = function()
             vim.api.nvim_win_set_cursor(0, { 2, 0 })
             vim.cmd [[setl noma]]
