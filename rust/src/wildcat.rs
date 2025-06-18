@@ -29,7 +29,7 @@ impl Default for Wildcat {
             build_tool: BuildTool::Maven,
             default_server: Server::Jboss,
             jboss: Some(Jboss::default()),
-            tomcat: None,
+            tomcat: Some(Tomcat::default()),
         }
     }
 }

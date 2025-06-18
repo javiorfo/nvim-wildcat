@@ -57,6 +57,8 @@ pub fn setup(dictionary: Dictionary) {
                 return;
             }
         }
+    } else {
+        wildcat_builder.tomcat(Tomcat::default());
     }
 
     if let Some(obj) = dictionary.get("jboss") {
@@ -69,6 +71,8 @@ pub fn setup(dictionary: Dictionary) {
                 return;
             }
         }
+    } else {
+        wildcat_builder.jboss(Jboss::default());
     }
 
     let wildcat = wildcat_builder.build();

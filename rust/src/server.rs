@@ -35,7 +35,7 @@ pub struct Jboss {
 
 impl Default for Jboss {
     fn default() -> Self {
-        let path = std::env::var("JBOSS_HOME").unwrap_or("JBOSS_HOME Not Set".to_string());
+        let path = std::env::var("JBOSS_HOME").unwrap_or("Not Set".to_string());
         Self {
             path,
             app_base: "standalone/deployments".to_string(),
@@ -130,6 +130,16 @@ impl FromObject for Jboss {
 pub struct Tomcat {
     pub path: String,
     app_base: String,
+}
+
+impl Default for Tomcat {
+    fn default() -> Self {
+        let path = std::env::var("CATALINA_HOME").unwrap_or("Not Set".to_string());
+        Self {
+            path,
+            app_base: "webapps".to_string(),
+        }
+    }
 }
 
 impl Tomcat {
