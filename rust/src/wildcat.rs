@@ -1,4 +1,5 @@
 use std::{
+    fmt::Display,
     io,
     process::{self, Command, Stdio},
 };
@@ -101,6 +102,8 @@ impl Wildcat {
     }
 
     pub fn run(&self, dir: &str) -> Result {
+        util::print_info(format!("Building project with {}...", self.build_tool));
+
         let status = self.build_tool.build(dir).map_err(Error::Io)?;
 
         if !status.success() {
@@ -203,8 +206,8 @@ impl WildcatBuilder {
             java_home: None,
             build_tool: BuildTool::default(),
             default_server: Server::default(),
-            jboss: None,
-            tomcat: None,
+            jboss: Some(Jboss::default()),
+            tomcat: Some(Tomcat::default()),
         })
     }
 
@@ -272,6 +275,15 @@ impl BuildTool {
         match self {
             BuildTool::Maven => "/target".to_string(),
             BuildTool::Gradle => "/build/libs".to_string(),
+        }
+    }
+}
+
+impl Display for BuildTool {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            BuildTool::Maven => write!(f, "Maven"),
+            BuildTool::Gradle => write!(f, "Gradle"),
         }
     }
 }
