@@ -1,6 +1,6 @@
 use std::{
     io,
-    process::{self, Command},
+    process::{self, Command, Stdio},
 };
 
 use nvim_oxi::{api, mlua::Table};
@@ -255,10 +255,14 @@ impl BuildTool {
         match self {
             BuildTool::Maven => Command::new("mvn")
                 .args(["-q", "clean", "package"])
+                .stdout(Stdio::null())
+                .stderr(Stdio::null())
                 .current_dir(dir)
                 .status(),
             BuildTool::Gradle => Command::new("gradle")
                 .args(["-q", "clean", "build"])
+                .stdout(Stdio::null())
+                .stderr(Stdio::null())
                 .current_dir(dir)
                 .status(),
         }

@@ -122,6 +122,7 @@ pub fn run(dir: String) {
 pub fn up(_: ()) {
     unsafe {
         if let Some(ref wildcat) = WILDCAT {
+            util::print_info("Building project...");
             if let Err(e) = wildcat.up() {
                 util::print_error(e);
             }
