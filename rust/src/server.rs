@@ -33,6 +33,16 @@ pub struct Jboss {
     app_base: String,
 }
 
+impl Default for Jboss {
+    fn default() -> Self {
+        let path = std::env::var("JBOSS_HOME").unwrap_or("JBOSS_HOME Not Set".to_string());
+        Self {
+            path,
+            app_base: "standalone/deployments".to_string(),
+        }
+    }
+}
+
 impl Jboss {
     pub fn run_path(&self) -> String {
         format!("{}/bin/standalone.sh", self.path)

@@ -28,6 +28,10 @@ fn wildcat() -> nvim_oxi::Result<Dictionary> {
             .build(),
     )?;
 
+    unsafe {
+        core::WILDCAT = Some(wildcat::Wildcat::default());
+    }
+
     let api = Dictionary::from_iter([
         ("clean", Object::from(Function::from_fn(core::clean))),
         ("deploy", Object::from(Function::from_fn(core::deploy))),

@@ -11,7 +11,7 @@ use crate::{
     util,
 };
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct Wildcat {
     console_size: usize,
     java_home: Option<String>,
@@ -19,6 +19,19 @@ pub struct Wildcat {
     default_server: Server,
     jboss: Option<Jboss>,
     tomcat: Option<Tomcat>,
+}
+
+impl Default for Wildcat {
+    fn default() -> Self {
+        Self {
+            console_size: 15,
+            java_home: None,
+            build_tool: BuildTool::Maven,
+            default_server: Server::Jboss,
+            jboss: Some(Jboss::default()),
+            tomcat: None,
+        }
+    }
 }
 
 impl Wildcat {
@@ -152,13 +165,23 @@ impl Wildcat {
 
     pub fn get_tomcat_info(&self) -> Option<(String, String)> {
         let path = self.tomcat.as_ref()?.path.clone();
-        let deploys = self.tomcat.as_ref()?.deployed_as_str().ok()?;
+        let deploys = self
+            .tomcat
+            .as_ref()?
+            .deployed_as_str()
+            .unwrap_or("No Data (Tomcat path not set)".to_string());
+
         Some((path, deploys))
     }
 
     pub fn get_jboss_info(&self) -> Option<(String, String)> {
         let path = self.jboss.as_ref()?.path.clone();
-        let deploys = self.jboss.as_ref()?.deployed_as_str().ok()?;
+        let deploys = self
+            .jboss
+            .as_ref()?
+            .deployed_as_str()
+            .unwrap_or("No Data (JBoss path not set)".to_string());
+
         Some((path, deploys))
     }
 
