@@ -20,26 +20,36 @@
         require 'wildcat.build'.build()
     end,
     opts = {
+
+        -- Optional. Default 15
         -- The size of the server console
         console_size = 15,
 
+        -- Optional. Default "jboss"
         -- Default server (jboss or tomcat)
         default_server = "jboss",
 
+        -- Optional. Default "maven"
         -- Build tool (maven or gradle)
         build_tool = "maven",
 
-        -- Java Home (Default JAVA_HOME from the system)
-        -- If a different java home is required from JAVA_HOME env var
+        -- Optional. Default JAVA_HOME from the system
+        -- If a different java home is required
         java_home = "/path/to/openjdk",
 
+        -- Optional 
+        -- Default path JBOSS_HOME from the system
+        -- Default app_base "standalone/deployments"
         jboss = {
-            path = "/path/to/jboss", -- If not set will take JBOSS_HOME from the system
+            path = "/path/to/jboss",
             app_base = "standalone/deployments",
         },
 
+        -- Optional 
+        -- Default path CATALINA_HOME from the system
+        -- Default app_base "webapps"
         tomcat = {
-            path = "/path/to/tomcat", -- If not set will take CATALINA_HOME from the system
+            path = "/path/to/tomcat",
             app_base = "webapps",
         }
     }
@@ -53,14 +63,14 @@ require'wildcat'.setup{
     build_tool = "gradle",
     default_server = "tomcat",
     tomcat = {
-        home = "/path/to/tomcat",
+        path = "/path/to/tomcat",
     }
 }
 ```
 
 ## Usage
 ### To deploy on the server
-- This command will run Maven or GradlMaven or Gradlet will deploy the war/ear in the deployments folder and it will start the server. To run it, inside the app root folder execute this command `:WildcatRun`
+- This command will run Maven or Gradle and will deploy the war/ear in the deployments folder and it will start the server. To run it, inside the app root folder execute this command `:WildcatRun`
 - If you want to run this command outside the app root folder, pass the path by parameter `:WildcatRun /path/to/your/app/folder`
 
 ### List of commands:
@@ -68,7 +78,7 @@ require'wildcat'.setup{
 | -------------- | --------------------------------- |
 | `:WildcatBuild`  | This command will build Rust binary |
 | `:WildcatClean`  | This command will delete the deployed files in _app base_ folder of the server |
-| `:WildcatDeploy` | This command will copy the current or absolute path of a war/ear the to _app base_ folder of the server |
+| `:WildcatDeploy` | This command will copy the current or absolute path of a war/ear the to _app base_ folder of the server (taken from */target* (Maven) or */build/libs* (Gradle) |
 | `:WildcatDown`   | This command will stop the server |
 | `:WildcatServer` | This command will open a popup to select JBoss or Tomcat and will show some servers info |
 | `:WildcatRun`    | This command will build with Maven, copy the war/ear file to the server and start the server|
