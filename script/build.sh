@@ -2,7 +2,7 @@
 
 ROOT=$1
 
-cargo build --release
+(cd $ROOT && cargo build --release)
 
 if [ $? -ne 0 ]; then
     exit 1
@@ -15,4 +15,4 @@ rm -f $LUA/*.so
 cp $ROOT/target/release/libwildcat.so $LUA
 mv $LUA/libwildcat.so $LUA/wildcat.so
 
-cargo clean
+(cd $ROOT && cargo clean)
