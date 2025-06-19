@@ -109,7 +109,7 @@ impl Wildcat {
         util::print_info(format!("Building project with {}...", self.build_tool));
         api::command("redraw").unwrap();
 
-        self.build_tool.build(dir)?;
+        self.build_tool.build(dir, &self.java_home)?;
 
         self.deploy(dir)?;
         self.up()?;
@@ -260,19 +260,24 @@ pub enum BuildTool {
 }
 
 impl BuildTool {
-    pub fn build(&self, dir: &str) -> Result {
+    pub fn build(&self, dir: &str, java_home: &Option<String>) -> Result {
         let (command, opts) = match self {
             BuildTool::Maven => ("mvn", ["-q", "clean", "package"]),
             BuildTool::Gradle => ("gradle", ["-q", "clean", "build"]),
         };
 
-        let mut child = Command::new(command)
+        let mut command = Command::new(command);
+        command
             .args(opts)
             .stdout(Stdio::piped())
             .stderr(Stdio::piped())
-            .current_dir(dir)
-            .spawn()
-            .map_err(Error::Io)?;
+            .current_dir(dir);
+
+        if let Some(java_home) = java_home {
+            command.env("JAVA_HOME", java_home);
+        }
+
+        let mut child = command.spawn().map_err(Error::Io)?;
 
         let mut stdout = child.stdout.take().unwrap();
         let mut stdout_buffer = String::new();
