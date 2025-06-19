@@ -1,4 +1,9 @@
+# doc
 tags
 
+# Rust
 target/
+debug/
+
+# Generated library
 lua/*.so
