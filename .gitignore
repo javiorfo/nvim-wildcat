@@ -1,4 +1,4 @@
 tags
 
-rust/target/
+target/
 lua/*.so
