@@ -44,6 +44,7 @@ impl Wildcat {
             Server::Jboss => self.default_server = Server::Tomcat,
             Server::Tomcat => self.default_server = Server::Jboss,
         }
+        util::print_info(format!("{} is now enabled", self.default_server.label()));
     }
 
     pub fn up(&self) -> Result {
