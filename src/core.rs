@@ -201,7 +201,7 @@ fn popup_error(build_tool: &str, error_msg: &str) -> Result {
 
     let title = lua.create_table().map_err(Error::Mlua)?;
     title
-        .set(1, format!("{} Build ERROR", build_tool))
+        .set(1, format!("{build_tool} Build ERROR"))
         .map_err(Error::Mlua)?;
     title.set(2, "ErrorMsg").map_err(Error::Mlua)?;
 

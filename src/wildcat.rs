@@ -130,7 +130,7 @@ impl Wildcat {
         };
 
         match deleted {
-            Ok(_) => util::print_info(format!("The content of {} has been deleted.", deploy_path)),
+            Ok(_) => util::print_info(format!("The content of {deploy_path} has been deleted.")),
             Err(e) => util::print_error(e),
         }
     }
@@ -189,7 +189,7 @@ impl Wildcat {
 
     fn set_java_home(&self) -> String {
         match self.java_home {
-            Some(ref java_home) => format!("export JAVA_HOME={} &&", java_home),
+            Some(ref java_home) => format!("export JAVA_HOME={java_home} &&"),
             None => String::new(),
         }
     }
