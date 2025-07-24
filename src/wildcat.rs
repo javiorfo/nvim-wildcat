@@ -83,9 +83,10 @@ impl Wildcat {
 
         api::command("file wildcat_server_console").unwrap();
 
-        if let Ok(lualine_table) = util::get_lua_module::<Table>("lualine") {
-            let hide_fn: mlua::Function = lualine_table.get("hide").unwrap();
-            hide_fn.call::<()>(()).unwrap();
+        if let Ok(lualine) = util::get_lua_module::<Table>("lualine") {
+            let _ = lualine
+                .get::<mlua::Function>("hide")
+                .and_then(|f| f.call::<()>(()));
         }
 
         let opts = api::opts::OptionOpts::builder()

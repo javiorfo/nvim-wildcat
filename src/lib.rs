@@ -1,6 +1,9 @@
 use nvim_oxi::{
     self, Dictionary, Function, Object,
-    api::{self, opts::CreateAutocmdOptsBuilder},
+    api::{
+        self,
+        opts::{CreateAugroupOpts, CreateAutocmdOptsBuilder},
+    },
     mlua,
 };
 
@@ -12,16 +15,23 @@ mod wildcat;
 
 #[nvim_oxi::plugin]
 fn wildcat() -> nvim_oxi::Result<Dictionary> {
+    let ag_name = "wildcat_statusline";
+
+    api::create_augroup(ag_name, &CreateAugroupOpts::builder().clear(true).build())?;
+
     api::create_autocmd(
-        vec!["BufDelete"],
+        ["BufDelete"],
         &CreateAutocmdOptsBuilder::default()
+            .group(ag_name)
             .patterns(vec!["wildcat_server_console"])
             .callback(|_| {
                 if let Ok(lualine_table) = util::get_lua_module::<mlua::Table>("lualine") {
-                    let hide_fn: mlua::Function = lualine_table.get("hide").unwrap();
-                    let table = mlua::lua().create_table().unwrap();
-                    table.set("unhide", true).unwrap();
-                    hide_fn.call::<()>(table).unwrap();
+                    if let Ok(fun) = lualine_table.get::<mlua::Function>("hide") {
+                        let _ = mlua::lua().create_table().and_then(|table| {
+                            table.set("unhide", true).unwrap();
+                            fun.call::<()>(table)
+                        });
+                    }
                 }
                 true
             })
